@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/react";
 import { useState } from 'react';
 import Web3 from 'web3';
 import { faucetABI } from '../ABI/faucetABI.ts';
-const Faucet = () => {
+export default function Faucet() {
   const [receiverAddress, setReceiverAddress] = useState('');
   const [sending, setSending] = useState(false); 
 
@@ -96,5 +96,3 @@ const Faucet = () => {
     </div>
   );
 };
-
-export default Faucet;

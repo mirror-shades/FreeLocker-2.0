@@ -1,9 +1,9 @@
-import Faucet from "./components/Faucet";
+import Locker from "./components/Locker";
 
 export default function App() {
   return (
     <div>
-    <Faucet />
+      <Locker />
     </div>
   )
 }
