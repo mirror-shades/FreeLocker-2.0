@@ -1,10 +1,9 @@
-import {Button} from "@nextui-org/react";
-import W3Conex from "./W3Conex";
+import Faucet from "./components/Faucet";
 
 export default function App() {
   return (
     <div>
-    <W3Conex />
+    <Faucet />
     </div>
   )
 }
