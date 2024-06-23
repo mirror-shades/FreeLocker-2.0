@@ -1,9 +1,9 @@
-import Locker from "./components/Locker";
+import Web3Container from "./components/Web3Container";
 
 export default function App() {
   return (
     <div>
-      <Locker />
+      <Web3Container />
     </div>
   )
 }

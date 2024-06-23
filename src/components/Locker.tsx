@@ -11,7 +11,6 @@ export default function Locker() {
 
   const checkIfInvalid = (value: ZonedDateTime): boolean => {
     const currentTime = now(getLocalTimeZone());
-    const unixTimestamp = toUnixTimestamp(selectedDate);
     return value.compare(currentTime) <= 0;
   };
 
@@ -50,7 +49,7 @@ export default function Locker() {
       <p>This will lock tokens for you</p>
       <input
         type="text"
-        placeholder="Enter receiver address"
+        placeholder="Enter token address"
         value={tokenAddress}
         onChange={(e) => setTokenAddress(e.target.value)}
       />
@@ -64,11 +63,11 @@ export default function Locker() {
         isInvalid={checkIfInvalid(selectedDate)}
         errorMessage={
           selectedDate && checkIfInvalid(selectedDate)
-            ? "Please enter a date at least one minute in the future."
+            ? "Please enter a date in the future."
             : undefined
         }
       />
-      <Button isLoading={false} onClick={lockTokens}>Gimme!</Button>
+      <Button color="primary" isLoading={false} onClick={lockTokens}>Lock!</Button>
     </div>
   );
 }
