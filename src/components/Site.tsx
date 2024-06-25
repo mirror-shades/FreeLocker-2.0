@@ -8,7 +8,7 @@ export default function Site(account:any) {
             <h1>Welcome to the Sepolia Network</h1>
             <p>Connected Account: {account.account}</p>
             <Faucet account={account} />
-            <Locker />
+            <Locker account={account} />
         </div>
     );
 };

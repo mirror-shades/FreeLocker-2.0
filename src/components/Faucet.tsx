@@ -13,22 +13,23 @@ export default function Faucet(account:any) {
   const tokenContract = new web3.eth.Contract(faucetABI, tokenContractAddress);
 
   const useFaucet = async () => {
-    try {
-      if (faucetPrivateKey) {
-        console.log("attempting to send...")
-        setSending(true);
-        await Promise.all([dropETH(), dropToken()]);
-        setSending(false);
-        console.log("transaction completed")
-      } else {
+    if (faucetPrivateKey) {
+        try {
+            console.log("attempting to send...")
+            setSending(true);
+            await Promise.all([dropETH(), dropToken()]);
+            setSending(false);
+            console.log("transaction completed")
+        }
+        catch (error: unknown) {
+            if (error instanceof Error) {
+                console.log(`Error: ${error.message}`);
+            } else {
+                console.log(`Unknown error: ${JSON.stringify(error)}`);
+            }
+        }
+    } else {
         console.log("issue with faucet initialization")
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(`Error: ${error.message}`);
-      } else {
-        console.log(`Unknown error: ${JSON.stringify(error)}`);
-      }
     }
   };
   
@@ -99,8 +100,7 @@ export default function Faucet(account:any) {
                 <p> 
                   This will airdrop both tokens and Sepolia Ethereum to your wallet.
                   This will let you test the platform even if you don't have any funds
-                  on the testnet! 
-                  Have fun.
+                  on the testnet! Have fun.
                 </p>
                 <br/>
                 <Button isLoading={sending} color="primary" onClick={useFaucet}>Gimme!</Button>

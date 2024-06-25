@@ -5,8 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    "typeRoots": ["./node_modules/@types", "./src"],
+    "typeRoots": ["./node_modules/@types"],  // Removed "./src" from typeRoots
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -23,5 +22,11 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "ABI", 
+    "assets" 
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
