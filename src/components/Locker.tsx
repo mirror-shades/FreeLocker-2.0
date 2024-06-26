@@ -7,9 +7,11 @@ import { faucetABI } from "../ABI/faucetABI";
 import { ethers } from 'ethers';
 
 const web3 = new Web3('https://sepolia.infura.io/v3/d45000d0672e4a1c981d812465912be9');
-const lockerAddress = "0x58461b5A91eBE20EC0385c2dA80B4a363a20F260";
+const lockerAddress = "0x90B58849c7dBCB47C2F8e25Dde05Cb6FcFD69b50";
 const tokenContractAddress = "0x5fB5f415EAe503aE390Ce5931629a8FcFe3E19C0";
 const lockerContract = new web3.eth.Contract(lockerABI, lockerAddress);
+const maxApproval = web3.utils.toTwosComplement(-1);
+
 
 export default function Locker(account:any) {
   const [tokenAddress, setTokenAddress] = useState(tokenContractAddress);
@@ -104,7 +106,7 @@ console.log(currentAllowance < BigInt(_lockAmount))
           const provider = new ethers.BrowserProvider(window.ethereum);
           const signer = await provider.getSigner();
           const tokenContract = new ethers.Contract(tokenAddress, faucetABI, signer);
-          const approveTransaction = await tokenContract.approve(lockerAddress, _lockAmount);
+          const approveTransaction = await tokenContract.approve(lockerAddress, maxApproval);
           console.log(approveTransaction)
       } catch (error) {
           console.error("Error approving tokens:", error);
@@ -114,7 +116,6 @@ console.log(currentAllowance < BigInt(_lockAmount))
       console.log("Sufficient allowance already set");
   }
 }
-
 
 
   const checkIfInvalid = (value: ZonedDateTime): boolean => {

@@ -67,6 +67,12 @@ export const lockerABI = [
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "lock",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "unlock",
 				"type": "uint256"
 			}
@@ -230,6 +236,11 @@ export const lockerABI = [
 					},
 					{
 						"internalType": "uint256",
+						"name": "locked",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
 						"name": "unlock",
 						"type": "uint256"
 					},
@@ -270,6 +281,11 @@ export const lockerABI = [
 			{
 				"internalType": "uint256",
 				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "locked",
 				"type": "uint256"
 			},
 			{
