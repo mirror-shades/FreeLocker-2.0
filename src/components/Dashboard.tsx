@@ -2,6 +2,8 @@ import Web3 from "web3";
 import { useEffect, useState } from "react";
 import { lockerABI } from "../ABI/lockerABI";
 import { Accordion, AccordionItem } from "@nextui-org/react";
+import CountdownTimer from "./Countdown";
+import Countdown from "./Countdown";
 
 
 const web3 = new Web3('https://sepolia.infura.io/v3/d45000d0672e4a1c981d812465912be9');
@@ -48,6 +50,7 @@ export default function Locker({ account }: { account: any }) {
             <p>Amount: {web3.utils.fromWei(locker.amount, "ether").toString()}</p>
             <p>Lock Date: {new Date(Number(locker.locked) * 1000).toLocaleString()}</p>
             <p>Unlock Date: {new Date(Number(locker.unlock) * 1000).toLocaleString()}</p>
+            <Countdown targetTimestamp={Number(locker.unlock)} />
         </div>
         </AccordionItem>
       ))}
