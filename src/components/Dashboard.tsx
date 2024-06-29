@@ -4,6 +4,7 @@ import { lockerABI } from "../ABI/lockerABI";
 import { Accordion, AccordionItem } from "@nextui-org/react";
 import CountdownTimer from "./Countdown";
 import Countdown from "./Countdown";
+import TokenRecognizer from "./TokenRecognizer";
 
 
 const web3 = new Web3('https://sepolia.infura.io/v3/d45000d0672e4a1c981d812465912be9');
@@ -21,7 +22,6 @@ interface LockerInfo {
 export default function Dashboard({ account }: { account: any }) {
   const [userLockers, setUserLockers] = useState<LockerInfo[]>([]);
   
-
     useEffect(() => {
         checkLockers();
     }, []);
@@ -42,20 +42,19 @@ export default function Dashboard({ account }: { account: any }) {
   return (
     <div>
       <Accordion isCompact variant="shadow" selectionMode="multiple">
-      {userLockers.map((locker, index) => (
-        <AccordionItem key={index} aria-label={`Locker ${index + 1}`} title={`Locker ${index + 1}`}>
-            <div key={index}>
-            <p>Title: Locker {index + 1}</p>
-            <p>Token: {locker.token}</p>
-            <p>Amount: {web3.utils.fromWei(locker.amount, "ether").toString()}</p>
-            <p>Lock Date: {new Date(Number(locker.locked) * 1000).toLocaleString()}</p>
-            <p>Unlock Date: {new Date(Number(locker.unlock) * 1000).toLocaleString()}</p>
-            <Countdown targetTimestamp={Number(locker.unlock)} />
-        </div>
-        </AccordionItem>
-      ))}
-    </Accordion>
-    </div>
-  );
-}
+        {userLockers.map((locker, index) => (
+          <AccordionItem key={index} aria-label={`Locker ${index + 1}`} title={`Locker ${index + 1}`}>
+              <div key={index}>
+              <p> <TokenRecognizer tokenContractAddress={locker.token} /></p>
+              <p>Amount: {web3.utils.fromWei(locker.amount, "ether").toString()}</p>
+              <p>Lock Date: {new Date(Number(locker.locked) * 1000).toLocaleString()}</p>
+              <p>Unlock Date: {new Date(Number(locker.unlock) * 1000).toLocaleString()}</p>
+              <Countdown targetTimestamp={Number(locker.unlock)} />
+          </div>
+          </AccordionItem>
+        ))}
+      </Accordion>
+      </div>
+    );
+  }
 }

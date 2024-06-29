@@ -151,9 +151,6 @@ console.log(currentAllowance < BigInt(_lockAmount))
             <ModalHeader>&nbsp;</ModalHeader>
             <ModalBody>
               
-
-
-
       <input
         type="text"
         placeholder="Enter token address"
@@ -193,8 +190,6 @@ console.log(currentAllowance < BigInt(_lockAmount))
         )}
       </ModalContent>
     </Modal>
-
-    
 
     </div>
   );
