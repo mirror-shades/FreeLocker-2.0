@@ -1,9 +1,9 @@
-import Web3Container from "./components/Web3Container";
+import Site from "./components/Site"
 
 export default function App() {
   return (
     <div>
-      <Web3Container />
+      <Site />
     </div>
   )
 }

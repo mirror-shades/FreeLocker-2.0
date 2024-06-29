@@ -2,6 +2,8 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDis
 import { useState } from 'react';
 import Web3 from 'web3';
 import { faucetABI } from '../ABI/faucetABI.ts';
+import "../assets/Comfortaa.ttf";
+
 
 export default function Faucet(account:any) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -90,20 +92,20 @@ export default function Faucet(account:any) {
 
   return (
     <>
-      <Button color="primary" onPress={onOpen}>Open Modal</Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
+      <Button className="font-comfortaa text-3xl" variant="light" color="default" size="lg" onPress={onOpen}>Faucet</Button>
+      <Modal className="font-comfortaa" isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Faucet</ModalHeader>
+              <ModalHeader>&nbsp;</ModalHeader>
               <ModalBody>
                 <p> 
-                  This will airdrop both tokens and Sepolia Ethereum to your wallet.
+                  This will airdrop both tokens and Ethereum to your wallet.
                   This will let you test the platform even if you don't have any funds
-                  on the testnet! Have fun.
+                  on the testnet! Have fun
                 </p>
                 <br/>
-                <Button isLoading={sending} color="primary" onClick={useFaucet}>Gimme!</Button>
+                <Button isLoading={sending} className="text-2xl" variant="light" color="default" onClick={useFaucet}>Gimme</Button>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>

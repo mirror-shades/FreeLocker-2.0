@@ -9,7 +9,12 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        designer: ['Designer', 'sans-serif'], 
+        comfortaa: ['Comfortaa', 'sans-serif'], 
+      },
+    }
   },
   darkMode: "class",
   plugins: [nextui()]

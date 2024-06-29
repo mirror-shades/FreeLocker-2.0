@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 
 dayjs.extend(duration);
 
-const CountdownTimer = ({ targetTimestamp }) => {
+const CountdownTimer = ({ targetTimestamp }: {targetTimestamp: number}) => {
 
   useEffect(() => {
     const timer = setInterval(() => {

@@ -1,4 +1,4 @@
-import { Button, DatePicker } from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, DatePicker} from "@nextui-org/react";
 import { useState } from "react";
 import Web3 from "web3";
 import { now, ZonedDateTime, getLocalTimeZone } from "@internationalized/date";
@@ -9,11 +9,11 @@ import { ethers } from 'ethers';
 const web3 = new Web3('https://sepolia.infura.io/v3/d45000d0672e4a1c981d812465912be9');
 const lockerAddress = "0x90B58849c7dBCB47C2F8e25Dde05Cb6FcFD69b50";
 const tokenContractAddress = "0x5fB5f415EAe503aE390Ce5931629a8FcFe3E19C0";
-const lockerContract = new web3.eth.Contract(lockerABI, lockerAddress);
 const maxApproval = web3.utils.toTwosComplement(-1);
 
 
 export default function Locker(account:any) {
+  const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [tokenAddress, setTokenAddress] = useState(tokenContractAddress);
   const [selectedDate, setSelectedDate] = useState(now(getLocalTimeZone()));
   const [lockAmount, setLockAmount] = useState(0);
@@ -142,8 +142,18 @@ console.log(currentAllowance < BigInt(_lockAmount))
   
   return (
     <div>
-      <h1>Locker</h1>
-      <p>This will lock tokens for you</p>
+
+    <Button className="font-comfortaa w-[400px] h-[100px] text-6xl" variant="ghost" color="default" size="lg" onPress={onOpen}>Locker</Button>
+    <Modal className="font-comfortaa" isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
+      <ModalContent>
+        {(onClose) => (
+          <>
+            <ModalHeader>&nbsp;</ModalHeader>
+            <ModalBody>
+              
+
+
+
       <input
         type="text"
         placeholder="Enter token address"
@@ -171,7 +181,21 @@ console.log(currentAllowance < BigInt(_lockAmount))
             : undefined
         }
       />
-      <Button color="primary" disabled={checkIfInvalid(selectedDate)} isLoading={false} onClick={sendDepositTransaction}>Lock!</Button>
+      <Button color="primary" disabled={checkIfInvalid(selectedDate)} isLoading={false} onClick={sendDepositTransaction}>Lock</Button>
+
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" variant="light" onPress={onClose}>
+                Close
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
+    </Modal>
+
+    
+
     </div>
   );
 }

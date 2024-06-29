@@ -18,8 +18,9 @@ interface LockerInfo {
   unlock: bigint;
 }
 
-export default function Locker({ account }: { account: any }) {
+export default function Dashboard({ account }: { account: any }) {
   const [userLockers, setUserLockers] = useState<LockerInfo[]>([]);
+  
 
     useEffect(() => {
         checkLockers();
@@ -27,7 +28,7 @@ export default function Locker({ account }: { account: any }) {
 
   const checkLockers = async () => {
     try {
-      const lockerList: Array<number> = await lockerContract.methods.getIds(account.account).call();
+      const lockerList: Array<number> = await lockerContract.methods.getIds(account).call();
       const lockers: LockerInfo[] = await Promise.all(
         lockerList.map(async (id) => await lockerContract.methods.getSafe(id).call())
       );
@@ -37,10 +38,9 @@ export default function Locker({ account }: { account: any }) {
     }
   };
 
-  
+  if(account){
   return (
     <div>
-      <div>Dashboard</div>
       <Accordion isCompact variant="shadow" selectionMode="multiple">
       {userLockers.map((locker, index) => (
         <AccordionItem key={index} aria-label={`Locker ${index + 1}`} title={`Locker ${index + 1}`}>
@@ -57,4 +57,5 @@ export default function Locker({ account }: { account: any }) {
     </Accordion>
     </div>
   );
+}
 }

@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+      font-family: 'Designer';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('src/assets/DESIGNER.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'Comfortaa';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('src/assets/Comfortaa.ttf') format('truetype');
+    }
+  }
