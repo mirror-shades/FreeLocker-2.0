@@ -14,7 +14,6 @@ export default function Header({ connectWallet, networkCheck, account }: {accoun
       </div>
     );
   };
-
   return (
     <div>
       <div className="flex items-center">

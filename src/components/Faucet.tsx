@@ -3,15 +3,16 @@ import { useState } from 'react';
 import Web3 from 'web3';
 import { faucetABI } from '../ABI/faucetABI.ts';
 import "../assets/Comfortaa.ttf";
+import { contractList } from "../contracts/contractList.ts";
 
 
 export default function Faucet(account:any) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [sending, setSending] = useState(false); 
-  const faucetPublicKey = "0xf5Bcbde62Dc34457AB5a8FEB171377F22E271d08";
+  const faucetPublicKey = contractList.faucet;
   const faucetPrivateKey = import.meta.env.VITE_FAUCET_PRIVATE_KEY;
   const web3 = new Web3('https://sepolia.infura.io/v3/d45000d0672e4a1c981d812465912be9');
-  const tokenContractAddress = "0x5fB5f415EAe503aE390Ce5931629a8FcFe3E19C0";
+  const tokenContractAddress = contractList.lockToken;
   const tokenContract = new web3.eth.Contract(faucetABI, tokenContractAddress);
 
   const useFaucet = async () => {
@@ -40,12 +41,12 @@ export default function Faucet(account:any) {
       const faucetObject = web3.eth.accounts.privateKeyToAccount(faucetPrivateKey);
       web3.eth.accounts.wallet.add(faucetObject);
       const gasPrice = await web3.eth.getGasPrice();
-      const gasEstimate = await tokenContract.methods.publicMint(account.account.account).estimateGas({ from: faucetPublicKey });
+      const gasEstimate = await tokenContract.methods.publicMint(account.account).estimateGas({ from: faucetPublicKey });
 
       //Create the transaction object
       const tx = {
         from: faucetObject.address,
-        to: account.account.account,
+        to: account.account,
         value: web3.utils.toWei('0.01', 'ether'),
         gas: gasEstimate,
         gasPrice: String(gasPrice) + 50
@@ -62,12 +63,12 @@ export default function Faucet(account:any) {
   async function dropToken() {
     try {
         // Prepare the transaction data
-        const txData = tokenContract.methods.publicMint(account.account.account).encodeABI();
+        const txData = tokenContract.methods.publicMint(account.account).encodeABI();
         
         // Fetch the nonce, gas price, and gas estimate
         const nonce = await web3.eth.getTransactionCount(faucetPublicKey, 'pending');
         const gasPrice = await web3.eth.getGasPrice();
-        const gasEstimate = await tokenContract.methods.publicMint(account.account.account).estimateGas({ from: faucetPublicKey });
+        const gasEstimate = await tokenContract.methods.publicMint(account.account).estimateGas({ from: faucetPublicKey });
 
         // Create the transaction object
         const tx = {

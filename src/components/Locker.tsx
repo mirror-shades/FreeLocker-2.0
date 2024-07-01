@@ -5,10 +5,11 @@ import { now, ZonedDateTime, getLocalTimeZone } from "@internationalized/date";
 import { lockerABI } from "../ABI/lockerABI";
 import { faucetABI } from "../ABI/faucetABI";
 import { ethers } from 'ethers';
+import { contractList } from '../contracts/contractList'
 
 const web3 = new Web3('https://sepolia.infura.io/v3/d45000d0672e4a1c981d812465912be9');
-const lockerAddress = "0x90B58849c7dBCB47C2F8e25Dde05Cb6FcFD69b50";
-const tokenContractAddress = "0x5fB5f415EAe503aE390Ce5931629a8FcFe3E19C0";
+const lockerAddress = contractList.locker;
+const tokenContractAddress = contractList.lockToken;
 const maxApproval = web3.utils.toTwosComplement(-1);
 
 
@@ -178,7 +179,7 @@ console.log(currentAllowance < BigInt(_lockAmount))
             : undefined
         }
       />
-      <Button color="primary" disabled={checkIfInvalid(selectedDate)} isLoading={false} onClick={sendDepositTransaction}>Lock</Button>
+      <Button disabled={checkIfInvalid(selectedDate)} isLoading={false}  className="text-2xl" variant="light" color="default"  onClick={sendDepositTransaction}>Lock</Button>
 
             </ModalBody>
             <ModalFooter>

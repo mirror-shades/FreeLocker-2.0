@@ -22,11 +22,12 @@ contract Locker is ReentrancyGuard {
         address owner;
         address token;
         uint256 amount;
+        uint256 locked;
         uint256 unlock;
         bool active;
     }
 
-    event Deposit(uint256 id, address indexed user, address indexed token, uint256 amount, uint256 unlock);
+    event Deposit(uint256 id, address indexed user, address indexed token, uint256 amount,  uint256 lock, uint256 unlock);
     event Unlock(uint256 id, address indexed user, address indexed token, uint256 amount);
 
     /**
@@ -49,6 +50,7 @@ contract Locker is ReentrancyGuard {
             owner: user,
             token: token,
             amount: amount,
+            locked: block.timestamp,
             unlock: block.timestamp + length,
             active: true
         });
@@ -56,7 +58,7 @@ contract Locker is ReentrancyGuard {
         addressToIds[user].push(currentID);
         idToSafe[currentID] = newSafe;
 
-        emit Deposit(currentID, user, token, amount, newSafe.unlock);
+        emit Deposit(currentID, user, token, amount, block.timestamp, newSafe.unlock);
 
         return currentID;
     }

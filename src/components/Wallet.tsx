@@ -8,7 +8,7 @@ export default function Web3App({ connectWallet, networkCheck, account }: {accou
     if (networkCheck === NETWORK_ID && account) {
         content = (
             <div>
-                <Faucet />
+                <Faucet account={account}/>
             </div>
         );
     } else {
@@ -18,6 +18,5 @@ export default function Web3App({ connectWallet, networkCheck, account }: {accou
             </button>
         );
     }
-
     return content;
 }
