@@ -7,7 +7,7 @@ export default function Header({ connectWallet, networkCheck, account }: {accoun
     return (
       <div>
         <h1 className="font-designer text-right font text-9xl">
-          TEST
+          FREE
           <br />
           LOCKER
         </h1>
