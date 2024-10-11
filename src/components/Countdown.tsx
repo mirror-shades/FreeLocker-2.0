@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react';
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 
 dayjs.extend(duration);
 
-const CountdownTimer = ({ targetTimestamp }: {targetTimestamp: number}) => {
+interface CountdownProps {
+  targetTimestamp: number;
+  readyMessage: string;
+}
 
+function Countdown({ targetTimestamp, readyMessage }: CountdownProps) {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft(targetTimestamp));
@@ -16,9 +20,9 @@ const CountdownTimer = ({ targetTimestamp }: {targetTimestamp: number}) => {
   const calculateTimeLeft = (timestamp: any) => {
     const now = dayjs();
     const target = dayjs.unix(timestamp);
-    
+
     const diff = dayjs.duration(target.diff(now));
-    
+
     const years = Math.floor(diff.asYears());
     const months = Math.floor(diff.asMonths() % 12);
     const days = Math.floor(diff.asDays() % 30);
@@ -29,11 +33,12 @@ const CountdownTimer = ({ targetTimestamp }: {targetTimestamp: number}) => {
 
     return { years, months, days, hours, minutes, seconds, milliseconds };
   };
-  
+
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetTimestamp));
 
   const formatTimeLeft = () => {
-    const { years, months, days, hours, minutes, seconds, milliseconds } = timeLeft;
+    const { years, months, days, hours, minutes, seconds, milliseconds } =
+      timeLeft;
 
     if (years > 0) {
       return `${years} years, ${months} months, ${days} days`;
@@ -50,12 +55,16 @@ const CountdownTimer = ({ targetTimestamp }: {targetTimestamp: number}) => {
     }
   };
 
+  if (calculateTimeLeft(targetTimestamp).seconds <= 0) {
+    return <div>{readyMessage}</div>;
+  }
+
   return (
     <div>
       <h1>Countdown Timer</h1>
       <p>{formatTimeLeft()}</p>
     </div>
   );
-};
+}
 
-export default CountdownTimer;
+export default Countdown;

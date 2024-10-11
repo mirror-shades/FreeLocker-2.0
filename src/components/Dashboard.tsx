@@ -115,7 +115,10 @@ export default function Dashboard({ account }: { account: string }) {
               <p>Amount: {locker.formattedAmount}</p>
               <p>Lock Date: {locker.lockDate}</p>
               <p>Unlock Date: {locker.unlockDate}</p>
-              <Countdown targetTimestamp={Number(locker.unlock)} />
+              <Countdown
+                targetTimestamp={Number(locker.unlock)}
+                readyMessage="Ready to unlock"
+              />
             </div>
           </AccordionItem>
         ))}
