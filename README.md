@@ -1,3 +1,7 @@
 # Free Locker
 
-Contracts and website for a token locking dapp built with solidity and svelte. Runs on the Sepolia network and there is a faucet to improve ease of testing.
+This project is built in svelte using ethers JS. it is a proof of concept for a free and decentralized token locking contract. The implementation is running on the Sepoloia test network and the website contains a faucet to add to ease of testing. 
+
+Vite/Svelte/Ethers.js
+
+```npm run dev'''
