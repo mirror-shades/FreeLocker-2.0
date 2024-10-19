@@ -4,4 +4,4 @@ This project is built in svelte using ethers JS. it is a proof of concept for a 
 
 Vite/Svelte/Ethers.js
 
-```npm run dev'''
+`npm run dev`
